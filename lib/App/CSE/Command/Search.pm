@@ -1,5 +1,5 @@
 package App::CSE::Command::Search;
-$App::CSE::Command::Search::VERSION = '0.001';
+$App::CSE::Command::Search::VERSION = '0.002';
 use Moose;
 extends qw/App::CSE::Command/;
 
@@ -256,6 +256,6 @@ __PACKAGE__->meta->make_immutable();
 
 =head1 NAME
 
-App::CSE::Command::Index - Indexes a directory
+App::CSE::Command::Search - Search the index for keywords or queries.
 
 =cut

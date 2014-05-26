@@ -1,5 +1,5 @@
 package App::CSE::Command::Check;
-$App::CSE::Command::Check::VERSION = '0.001';
+$App::CSE::Command::Check::VERSION = '0.002';
 use Moose;
 extends qw/App::CSE::Command/;
 
@@ -52,6 +52,6 @@ __PACKAGE__->meta->make_immutable();
 
 =head1 NAME
 
-App::CSE::Command::Help - Help about the cse utility
+App::CSE::Command::Check - Checks and display info about an index.
 
 =cut

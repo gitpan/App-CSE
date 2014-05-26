@@ -1,5 +1,5 @@
 package App::CSE::Command::Help;
-$App::CSE::Command::Help::VERSION = '0.001';
+$App::CSE::Command::Help::VERSION = '0.002';
 use Moose;
 extends qw/App::CSE::Command/;
 
@@ -30,6 +30,11 @@ sub execute{
 
 __PACKAGE__->meta->make_immutable();
 
+__END__
+
+=head1 NAME
+
+App::CSE::Command::Help - cse's help
 
 =head1 SYNOPSIS
 

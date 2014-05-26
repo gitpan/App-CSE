@@ -1,5 +1,5 @@
 package App::CSE::File::TextXTex;
-$App::CSE::File::TextXTex::VERSION = '0.001';
+$App::CSE::File::TextXTex::VERSION = '0.002';
 use Moose;
 extends qw/App::CSE::File::TextPlain/;
 
