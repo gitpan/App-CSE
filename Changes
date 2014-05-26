@@ -1,0 +1,448 @@
+==================================================
+Changes from 2013-05-26 00:00:00 +0000 to present.
+==================================================
+
+------------------------------------------
+version 0.001 at 2014-05-26 12:58:45 +0000
+------------------------------------------
+
+  Change: 193513447b97a12f8734332a80362ca966917bf7
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-26 13:52:31 +0000
+
+    Added version in help output 
+
+  Change: 57fef2e3c010e8afea699b7db78faf72d20f01cc
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-26 13:35:49 +0000
+
+    Better doc. Readme is there 
+
+  Change: eb974a26c748e6919d3ea168234f87d9c0a8c0ec
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-26 13:26:56 +0000
+
+    Better doc 
+
+  Change: b24a12c4fdd60309e6a22eb1f58bfc266e14f8ba
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 23:38:18 +0000
+
+    Make sure the progress bar goes to 100pc 
+
+  Change: 206d0dee52372c8483018f398f02478f2fbc4061
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 19:17:19 +0000
+
+    Nicer code 
+
+  Change: c122e3f3451fdba6e0f64b7568d5e297cc236805
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 19:12:38 +0000
+
+    Better gitignore 
+
+  Change: 85a84e91ab4e4c3971cb4ed038272e5c03a6ab01
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 19:12:13 +0000
+
+    Removed warning 
+
+  Change: 2df2d461922eb7dcc6452ea135bc35266b6ff8a1
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 18:38:57 +0000
+
+    Added progress bar to indexing 
+
+  Change: d3f86ec6f19db554c78171b1707538cb3263bbdc
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 18:11:33 +0000
+
+    Report size of files indexed 
+
+  Change: 224f8d4277158fa3ebf97f5edcea422c8480f3ad
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 17:27:01 +0000
+
+    Report on indexing 
+
+  Change: 5116e8c5202924f81d1a9a6b19ad5a95131cc1ab
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 15:45:23 +0000
+
+    Prefix query for dir filtering is case insensitive 
+
+  Change: a35677b89b3674279f73ea05ef0edede41576324
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 15:30:53 +0000
+
+    Added searching in a specific directory 
+
+  Change: bd1d7a18c2d1ddbe8bc7577507c21568860555bc
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 15:14:38 +0000
+
+    Moved directory to index to option 
+
+  Change: 637b4d78fc2a76b0bf395ea4232735e12fa93799
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 14:58:46 +0000
+
+    Preparing for dir 
+
+  Change: fc869a1a87852fa7bf7bdd72b79bd8483e6a4262
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 13:23:02 +0000
+
+    Demoted hidden files warnings to trace level 
+
+  Change: 5796c4520e031e6a0297113d111830cc72fdb0de
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 13:19:33 +0000
+
+    Added search time 
+
+  Change: dee668e4ffc0ed35dba5693b565a3408fdaeaea4
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 13:08:50 +0000
+
+    Limit sort mode to specific versions of Perl 
+
+  Change: 1ab13214319699c8d6d7a0c9c0c365b19d34c50d
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 12:46:39 +0000
+
+    Sort mode is ready by segfault is not far.. 
+
+  Change: 5db390acbe9b09f68a89b74d1c35f2c790178e92
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 11:56:47 +0000
+
+    Nicer display of field types 
+
+  Change: 54b16c47d1eaa3549f3fa2198e0bb15bd57837e0
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 11:49:33 +0000
+
+    Less clutter 
+
+  Change: 116ba2bb4e47da97233fc779a32d28cc8afc9039
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 11:46:35 +0000
+
+    TextXTex inherits from TextPlain 
+
+  Change: aaf6a3e9365dad86ef31893d49909817719d266f
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 11:42:33 +0000
+
+    Better dynamic file 
+
+  Change: 9484103fd2e88a7976d9218ad7e2f0a5ea2791c0
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-24 11:16:52 +0000
+
+    Few enhancements 
+
+  Change: c31ddee824c450727a45d4590a5b4049fc1e8cbd
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-22 23:06:42 +0000
+
+    Some versions of MIME Magic think .ini are latex files 
+
+  Change: 50c9e6ab4bc69d5adae4cfaacdeef0086965deaf
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-22 22:47:55 +0000
+
+    Added dependency on Encode 
+
+  Change: 6277250d781b505cf8fed8e3d486e77cce0acaae
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-22 22:45:56 +0000
+
+    Protecting against badly encoded files 
+
+  Change: c18750c257041f0aa12138bbcdaa882234e04787
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-22 22:18:35 +0000
+
+    Added a bit of doc 
+
+  Change: f5d9dfef3ebfb1e0b52f767d317e00df735fbacd
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-22 22:13:27 +0000
+
+    Added directory matching 
+
+  Change: 1a86fa0345b8d78e2683d9cef925bc81b222637c
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-22 21:42:29 +0000
+
+    Added max_size and sticking to it 
+
+  Change: 6bf003fb8c6cb7ddb9f9021a8e88660da9abe16a
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-22 21:01:41 +0000
+
+    Files know about the cse 
+
+  Change: df281f75fcbc5c6922d153c8959c3ef656b7dedc
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-22 20:57:55 +0000
+
+    Deported stat to file object 
+
+  Change: 5c3065eb4fe29e0aeab8d1472e1a4a66a907a657
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-22 20:46:48 +0000
+
+    Added text file 
+
+  Change: 911322a107e68ed43f9f441ffe219de89f5995bc
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-22 00:44:20 +0000
+
+    Test requires Carp Always 
+
+  Change: 941c378cbfb65451499446d5c0f696e41051a552
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-22 00:40:00 +0000
+
+    Protect against insecure class name 
+
+  Change: bd7f304de30be2d1a2c13269e942184c5160b575
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-22 00:13:00 +0000
+
+    Make the perl test a real one 
+
+  Change: 3d1c1b24abdbd7c5efd4d567cb3c9274e660d13a
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-22 00:07:39 +0000
+
+    Index pod as perl 
+
+  Change: 6e4ce010c2ce0bab435aac135cbf875318b808f9
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-22 00:04:46 +0000
+
+    Moved perl files to their place 
+
+  Change: 9792be0b2159dce36abf49d8b55c347319cd7ac4
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-22 00:01:35 +0000
+
+    Added javascript and ruby support 
+
+  Change: 7983122c04fa409357149a4f4278ec65fdf80024
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-21 23:38:46 +0000
+
+    Removed warning 
+
+  Change: a628b0ad1cd5362e80ad2b69baa7b51d930d7c80
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-21 23:36:28 +0000
+
+    Turn text/troff files into perl ones if needed 
+
+  Change: 170820406924aebedd2906b9fc563e8b53f5b1be
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-21 23:09:24 +0000
+
+    Use file object in index command 
+
+  Change: ff404381014b1d20e8a9575a81aa7cc839e945ae
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-21 23:07:52 +0000
+
+    A file decides on its content 
+
+  Change: 4d23ccbf5cc3e23d69c546d73145278fc7c9cfa0
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-21 23:00:46 +0000
+
+    Introduced file classes 
+
+  Change: b4a32d1c8b8ab8fbb6fe3d31e5df624937191489
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 18:53:23 +0000
+
+    Dist::Zilla independant travis 
+
+  Change: c41d2762721ef11a727117d3810a0d2ceb018b96
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 18:43:10 +0000
+
+    Dist::Zilla-ified travis 
+
+  Change: 6ce531040989894d833a22bb7e91d8e5510d6890
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 18:39:21 +0000
+
+    Added travis 
+
+  Change: 4d70f48505017930d22078eb76ad7bc2c0a79dc9
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 18:35:19 +0000
+
+    Nicer matching colors 
+
+  Change: afe704a69be382705884c0ad5bee7e9858d611e8
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 18:33:29 +0000
+
+    Nicer matching colors 
+
+  Change: d6214f89f09751cf450b288ee13eb254c1fd4415
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 18:27:43 +0000
+
+    Implemented Offset/Num. Better help 
+
+  Change: a260786bb93b6262944b76773a360b7f736d43eb
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 17:58:01 +0000
+
+    Default to AND for multiple terms 
+
+  Change: c2a13bd66f998afbd626a7dc2bd81858ba068b31
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 17:49:34 +0000
+
+    Prefix query now also does highlighting 
+
+  Change: acd6fd2c2a7226185d5aab4a8599c6df0237b303
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 17:26:19 +0000
+
+    Query prefix works 
+
+  Change: 62963c6fc8f59951796ad4170e9960f6965a791e
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 16:57:38 +0000
+
+    Nicer display 
+
+  Change: a3cb1aa2a1d6f8fd9548d25034ff5662d91400cf
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 16:55:16 +0000
+
+
+  Change: 80da7ab31ed3a4038583be943c67ce97442e22f4
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 15:12:14 +0000
+
+    Show out of date hits and index date 
+
+  Change: e8eb31343ee513aca3f7b8ab4d643c5b44502480
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 14:49:54 +0000
+
+    Test building dir at search time 
+
+  Change: 619ea62f822a434e8e407f1cb78cb33263b9f690
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 14:31:39 +0000
+
+    Searching triggers index building 
+
+  Change: afe0f5396776dab073dd9d6d26e7f314eaabe640
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 13:33:41 +0000
+
+    Nicer output 
+
+  Change: 0ae5faca2e049d368d96840b7d84237762c13839
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 13:12:18 +0000
+
+    No warnings 
+
+  Change: 639500e31b9d590201e1fb84cbf3ee749f807d7f
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 12:49:14 +0000
+
+    More verbosity tests 
+
+  Change: 303dfc25d4c12467dbc23693148fa31c83ed4945
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 12:32:58 +0000
+
+    Better output 
+
+  Change: 6469437af0b714bdeffc829f96ae37963ec9cb15
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 12:23:42 +0000
+
+    Test for various combinations 
+
+  Change: 6a0e25d2053490905da6541f6cc7eaeeeb35592c
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-18 12:09:09 +0000
+
+    Added highlighting 
+
+  Change: 0e0094f20ab7f05bf0dc22d4a2b03445223faf7f
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-17 16:57:17 +0000
+
+    Nicer gitignore 
+
+  Change: 183f64627475aaa5f07e3608d480ae508fdca80f
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-17 16:30:44 +0000
+
+    Indexing content 
+
+  Change: b2e0400d6522b9de26e0ab9b8bcf150042b8a4b5
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-17 15:57:05 +0000
+
+    Locating files 
+
+  Change: 9f289863c8dcef8efa9c9537abad4717bd5db9f4
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-17 15:42:30 +0000
+
+    Introduced Index command 
+
+  Change: f4def9c562360381814941c05da0e2b8fe31bc57
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-16 00:47:32 +0000
+
+    Started to implement check 
+
+  Change: 0ee9aac97865b66905e3c0e18883e309e9fdab30
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-16 00:22:43 +0000
+
+    Binary is there 
+
+  Change: f6a83fa6aae8da4681a2e4156f83ae179dc17bb5
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-16 00:17:03 +0000
+
+    Defaults to help 
+
+  Change: 1e49b8e57c385fb634c51b684ca4a0783c43030c
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-16 00:15:53 +0000
+
+    Implemented help 
+
+  Change: aa4852d691da06b8faf295fa7ad149444df3a6e2
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-15 23:24:47 +0000
+
+    Better dist ini 
+
+  Change: 222a09a24f67380f3fec640c35be89dea2b4e5b7
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-15 23:09:23 +0000
+
+    Inception 
+
+================
+End of releases.
+================
