@@ -1,5 +1,5 @@
 package App::CSE::Command::Index;
-$App::CSE::Command::Index::VERSION = '0.002';
+$App::CSE::Command::Index::VERSION = '0.003';
 use Moose;
 extends qw/App::CSE::Command/;
 
@@ -16,7 +16,6 @@ use Path::Class::Dir;
 use Lucy::Plan::Schema;
 
 use String::CamelCase;
-use Term::ANSIColor;
 use Term::ProgressBar;
 use Time::HiRes;
 
@@ -68,8 +67,11 @@ sub execute{
   # String type
   my $sstring_type = Lucy::Plan::StringType->new( sortable => 1 );
 
+  # Plain string type
+  my $plain_string = Lucy::Plan::StringType->new();
 
   $schema->spec_field( name => 'path' , type => $ft_nohl );
+  $schema->spec_field( name => 'path.raw' , type => $plain_string );
   $schema->spec_field( name => 'dir'  , type => $sstring_type );
   $schema->spec_field( name => 'mtime' , type => $sstring_type );
   $schema->spec_field( name => 'mime' , type => $sstring_type );
@@ -146,6 +148,7 @@ sub execute{
     my $content = $file->content();
     $indexer->add_doc({
                        path => $file->file_path(),
+                       'path.raw' => $file->file_path(),
                        dir => $file->dir(),
                        mime => $file->mime_type(),
                        mtime => $file->mtime->iso8601(),
@@ -170,7 +173,7 @@ sub execute{
 
   my $END_TIME = Time::HiRes::time();
 
-  $LOGGER->info(colored("Index is ".$self->cse()->index_dir()->stringify(), 'green bold'));
+  $LOGGER->info($self->cse->colorizer->colored("Index is ".$self->cse()->index_dir()->stringify(), 'green bold'));
   $LOGGER->info("$NUM_INDEXED files ($TOTAL_SIZE Bytes) indexed in ".sprintf('%.03f', ( $END_TIME - $START_TIME )).' seconds');
 
   return 0;

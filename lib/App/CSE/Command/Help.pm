@@ -1,5 +1,5 @@
 package App::CSE::Command::Help;
-$App::CSE::Command::Help::VERSION = '0.002';
+$App::CSE::Command::Help::VERSION = '0.003';
 use Moose;
 extends qw/App::CSE::Command/;
 
@@ -90,7 +90,7 @@ Examples:
   # Searching ruby in everything but ruby files:
   cse -- 'ruby -mime:application/x-ruby'
 
-  # Note the '--' that protects the rest of the command line to be interpreted as -options.
+  # Note the '--' that prevents the rest of the command line to be interpreted as -options.
 
 =head3 search options
 
@@ -127,6 +127,10 @@ Rebuild the index from the current directory.
 Directory to index. Defaults to current directory.
 
 =back
+
+=head2 update
+
+Updates the files marked as dirty (after a search) in the index.
 
 =head1 COMMON OPTIONS
 

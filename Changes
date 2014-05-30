@@ -1,9 +1,158 @@
 ==================================================
-Changes from 2013-05-26 00:00:00 +0000 to present.
+Changes from 2013-05-30 00:00:00 +0000 to present.
 ==================================================
 
 ------------------------------------------
-version 0.002 at 2014-05-26 14:48:59 +0000
+version 0.003 at 2014-05-30 23:01:19 +0000
+------------------------------------------
+
+  Change: d98ac0ad2c0822c5ad26dc3b658741c89e7758e0
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-30 23:37:29 +0000
+
+    Highlights are white 
+
+  Change: 39739e81a7235008c1abf3c357537ecd804876af
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-30 23:33:24 +0000
+
+    All commands use the colorizer 
+
+  Change: 84e16b765930841595203cea501e8ea27bb61d9c
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-30 23:14:37 +0000
+
+    Added doc 
+
+  Change: 525f8b1ccb747dec24b751fab5f5c5250a216f77
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-30 23:02:46 +0000
+
+    Implemented inside out object ourselves to be compatible with lucy 
+
+  Change: 92bc3b5571a05fac6566f6afaf26da315fd54575
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-30 22:51:00 +0000
+
+    Removed perl 5.8 uncompatible defined or 
+
+  Change: 62cc3345d165e5e190d04d9862aaaa8ca3fccd9c
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-30 22:45:39 +0000
+
+    Highlighter takes interactive into account 
+
+  Change: 8ebabd43bbb2c99cabcb597daf3b0a7dd0a0312b
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-30 22:40:09 +0000
+
+    Added cse_command accessor to highlighter 
+
+  Change: 9cb2f7f81fce470dca4be116f54cb2dd89f44a95
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-30 22:22:04 +0000
+
+    Added colorizer 
+
+  Change: adc442d38f9af4a81760cf928813d7714f6d5999
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-30 22:03:24 +0000
+
+    Use IO::Interactive to probe for interactiveness 
+
+  Change: 647f6e93bb2104a470cf875094755da777e4942c
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-29 21:11:07 +0000
+
+    Added update doc 
+
+  Change: 04eae88c5660d3b5a284754f9a374f2472ea1872
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-27 23:59:32 +0000
+
+    Nicer update output 
+
+  Change: d7b19f71d4eb3d2379c8be536187d17402e807e2
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-27 23:57:12 +0000
+
+    Tested update 
+
+  Change: 53eda65f23b7ed9037c05d4144d68ee2487bf96e
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-27 22:45:44 +0000
+
+    Requires JSON 
+
+  Change: ec9473de52c0a1293ecab6997bb6eb180d13beb2
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-27 22:45:15 +0000
+
+    Indicate dirty files in the check command 
+
+  Change: 4f922d676dbc85d4196e27f8c96624bc7f435e3b
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-27 22:42:24 +0000
+
+    Remember dirty files after a search 
+
+  Change: 3da0a9b38ac7ba8d366c8a8821d662c8812f2825
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-27 22:39:34 +0000
+
+    Dirty files memory is there 
+
+  Change: 3bcd5c54dad593881630709ae0b6a37953b4a1f9
+  Author: Jerome Eteve <jerome@broadbean.com>
+  Date : 2014-05-27 16:56:06 +0000
+
+    Do not reimplement effective_object in LaTeX 
+
+  Change: ac295e31470dbd5386caf60204c1b94a82e9c855
+  Author: Jerome Eteve <jerome@broadbean.com>
+  Date : 2014-05-27 16:40:00 +0000
+
+    Correct binmode in verbose test 
+
+  Change: a49fdd2f926e01eb10a63f1165df17260b24a5f9
+  Author: Jerome Eteve <jerome@broadbean.com>
+  Date : 2014-05-27 14:09:02 +0000
+
+    Added features 
+
+  Change: 1cce7f4fc96ba574cbefd20d22b27f61d821e096
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-26 18:53:35 +0000
+
+    Added Python basic file 
+
+  Change: 17dff44d6a58871b91582ff75c0bb60ee3f5f23c
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-26 18:41:45 +0000
+
+    Move hello test to bonjour. Allow vanilla hello world files in test
+    suites 
+
+  Change: 3b230c7fe84aa0c16cdd1c36868fec776f41c725
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-26 18:19:44 +0000
+
+    Added CSharp file 
+
+  Change: 3bf5c61bb579d17db3519e0f9c9f7b343ae8324f
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-26 18:08:35 +0000
+
+    Added basic Java type 
+
+  Change: aee75a544107976b30c802a05920b04c26e7026e
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-26 17:33:36 +0000
+
+    Prevents, not protects 
+
+------------------------------------------
+version 0.002 at 2014-05-26 14:48:50 +0000
 ------------------------------------------
 
   Change: e01e6f1a7df92dd81d50bf8210bad3e17857e5fa

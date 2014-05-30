@@ -1,4 +1,5 @@
 requires 'Carp';
+requires 'Class::InsideOut';
 requires 'Class::Load';
 requires 'DateTime';
 requires 'Encode';
@@ -8,6 +9,8 @@ requires 'File::Slurp';
 requires 'File::Stat';
 requires 'Filesys::DiskUsage';
 requires 'Getopt::Long';
+requires 'IO::Interactive';
+requires 'JSON';
 requires 'Log::Log4perl';
 requires 'Lucy';
 requires 'Moose';

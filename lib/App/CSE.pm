@@ -7,11 +7,14 @@ BEGIN{
 use strict;
 use warnings;
 package App::CSE;
-$App::CSE::VERSION = '0.002';
+$App::CSE::VERSION = '0.003';
 
 use Moose;
 use Class::Load;
+use App::CSE::Colorizer;
 use DateTime;
+use IO::Interactive;
+use JSON;
 use String::CamelCase;
 
 use Path::Class::Dir;
@@ -39,6 +42,22 @@ Using cpanm:
   cse
 
 See L<App::CSE::Command::Help> For a description the available commands.
+
+=head1 FEATURES
+
+=over
+
+=item Hit highlighting
+
+=item Dirty index indicator
+
+=item Directory filtering
+
+=item Paging
+
+=item Works with Perl 5.8.8 up to 5.20
+
+=back
 
 =head1 PROGRAMMATIC USAGE
 
@@ -92,7 +111,8 @@ has 'command_name' => ( is => 'ro', isa => 'Str', required => 1 , lazy_build => 
 has 'command' => ( is => 'ro', isa => 'App::CSE::Command', lazy_build => 1);
 has 'max_size' => ( is => 'ro' , isa => 'Int' , lazy_build => 1);
 
-has 'interactive' => ( is => 'ro' , isa => 'Bool' , default => 0 );
+has 'interactive' => ( is => 'ro' , isa => 'Bool' , lazy_build => 1  );
+has 'colorizer' => ( is => 'ro' , isa => 'App::CSE::Colorizer' , lazy_build => 1);
 
 # GetOpt::Long options specs.
 has 'options_specs' => ( is => 'ro' , isa => 'ArrayRef[Str]', lazy_build => 1);
@@ -106,6 +126,42 @@ has 'args' => ( is => 'ro' , isa => 'ArrayRef[Str]', lazy_build => 1);
 
 has 'index_dir' => ( is => 'ro' , isa => 'Path::Class::Dir', lazy_build => 1);
 has 'index_mtime' => ( is => 'ro' , isa => 'DateTime' , lazy_build => 1);
+has 'index_dirty_file' => ( is => 'ro' , isa => 'Path::Class::File', lazy_build => 1);
+has 'dirty_files' => ( is => 'ro', isa => 'HashRef[Str]', lazy_build => 1);
+
+{# Singleton flavour
+  my $instance;
+  sub BUILD{
+    my ($self) = @_;
+    $instance = $self;
+  }
+  sub instance{
+    return $instance;
+  }
+}
+
+sub _build_colorizer{
+  my ($self) = @_;
+  return App::CSE::Colorizer->new( { cse => $self } );
+}
+
+sub _build_interactive{
+  my ($self) = @_;
+  return IO::Interactive::is_interactive();
+}
+
+sub _build_index_dirty_file{
+  my ($self) = @_;
+  return $self->index_dir()->file('cse_dirty.js');
+}
+
+sub _build_dirty_files{
+  my ($self) = @_;
+  unless( -r $self->index_dirty_file() ){
+    return {};
+  }
+  return JSON::decode_json(File::Slurp::read_file($self->index_dirty_file().'' , { binmode => ':raw' }));
+}
 
 sub _build_index_mtime{
   my ($self) = @_;
@@ -218,6 +274,12 @@ sub main{
   }
 
   return $self->command()->execute();
+}
+
+sub save_dirty_files{
+  my ($self) = @_;
+  File::Slurp::write_file($self->index_dirty_file().'' , { binmode => ':raw' }, JSON::encode_json($self->dirty_files));
+  return 1;
 }
 
 sub version{

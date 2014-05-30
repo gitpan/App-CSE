@@ -17,6 +17,7 @@ meta-spec:
 name: App-CSE
 requires:
   Carp: '0'
+  Class::InsideOut: '0'
   Class::Load: '0'
   DateTime: '0'
   Encode: '0'
@@ -26,6 +27,8 @@ requires:
   File::Stat: '0'
   Filesys::DiskUsage: '0'
   Getopt::Long: '0'
+  IO::Interactive: '0'
+  JSON: '0'
   Log::Log4perl: '0'
   Lucy: '0'
   Moose: '0'
@@ -38,4 +41,4 @@ requires:
 resources:
   homepage: https://github.com/jeteve/App-CSE
   repository: https://github.com/jeteve/App-CSE.git
-version: '0.002'
+version: '0.003'
