@@ -6,7 +6,7 @@ requires 'Encode';
 requires 'File::Find';
 requires 'File::MimeInfo::Magic';
 requires 'File::Slurp';
-requires 'File::Stat';
+requires 'File::stat';
 requires 'Filesys::DiskUsage';
 requires 'Getopt::Long';
 requires 'IO::Interactive';
@@ -20,6 +20,7 @@ requires 'Scalar::Util';
 requires 'String::CamelCase';
 requires 'Term::ProgressBar';
 requires 'Time::HiRes';
+requires 'XML::LibXML';
 
 test_requires 'Test::More';
 test_requires 'File::Temp';

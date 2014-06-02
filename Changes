@@ -1,9 +1,51 @@
 ==================================================
-Changes from 2013-05-30 00:00:00 +0000 to present.
+Changes from 2013-06-02 00:00:00 +0000 to present.
 ==================================================
 
 ------------------------------------------
-version 0.003 at 2014-05-30 23:01:19 +0000
+version 0.004 at 2014-06-02 09:28:01 +0000
+------------------------------------------
+
+  Change: 87b36155e8a4eafca3a18571d7a1c5dafd08ee0b
+  Author: Jerome Eteve <jeteve@users.noreply.github.com>
+  Date : 2014-06-02 10:27:14 +0000
+
+    Merge pull request #1 from chorny/patch-1
+
+    correct case File::stat dep. 
+
+  Change: 47989433d35f58c881a2a50df31578b7320358b3
+  Author: Alexandr Ciornii <alexchorny@gmail.com>
+  Date : 2014-06-01 20:38:29 +0000
+
+    correct case for dependency 
+
+  Change: a9a70d1ef4b1ae5b6b5fd7b512217da7fa30dde4
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-31 17:17:38 +0000
+
+    Prefix queries can now be qualified 
+
+  Change: c934016ec4db200be78f0f5cf496653385fa89cd
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-31 15:16:59 +0000
+
+    Added C++ files 
+
+  Change: fa09f9a10d52a100f54e7d0c6032e5092533575d
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-31 14:51:03 +0000
+
+    Added html file type 
+
+  Change: e835a56d213ae8ae687551312b553938f2c3ea40
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-05-31 14:44:09 +0000
+
+    Nicer indexing of XML files. Manage XHTML 
+
+------------------------------------------
+version 0.003 at 2014-05-30 22:37:29 +0000
 ------------------------------------------
 
   Change: d98ac0ad2c0822c5ad26dc3b658741c89e7758e0

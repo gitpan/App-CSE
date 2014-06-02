@@ -1,5 +1,8 @@
 package App::CSE::Command::Index;
-$App::CSE::Command::Index::VERSION = '0.003';
+{
+  $App::CSE::Command::Index::VERSION = '0.004';
+}
+
 use Moose;
 extends qw/App::CSE::Command/;
 
