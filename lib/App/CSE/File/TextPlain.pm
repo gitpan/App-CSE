@@ -1,8 +1,5 @@
 package App::CSE::File::TextPlain;
-{
-  $App::CSE::File::TextPlain::VERSION = '0.004';
-}
-
+$App::CSE::File::TextPlain::VERSION = '0.005';
 use Moose;
 extends qw/App::CSE::File/;
 

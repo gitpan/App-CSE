@@ -1,8 +1,5 @@
 package App::CSE::Command::Search;
-{
-  $App::CSE::Command::Search::VERSION = '0.004';
-}
-
+$App::CSE::Command::Search::VERSION = '0.005';
 use Moose;
 extends qw/App::CSE::Command/;
 
@@ -73,7 +70,10 @@ sub _build_sort_spec{
 
 sub _build_highlighter{
   my ($self) = @_;
-  $LOGGER->debug("Using highlight_query = ".$self->highlight_query->to_string());
+
+  ## Note that this only builds a content highlighter.
+
+  $LOGGER->debug("Using highlight_query = ".$self->highlight_query('content')->to_string());
   return App::CSE::Lucy::Highlight::Highlighter->new(
                                                      searcher => $self->searcher(),
                                                      query    => $self->highlight_query(),
@@ -85,16 +85,20 @@ sub _build_highlighter{
 
 =head2 highlight_query
 
-The query used to highlight the content. Will be the original
+Returns the query used to highlight the given field. Will be the original
 query or the highlight query of the query prefix.
+
+Usage:
+
+  my $hl_query = $this->highlight_query('content');
 
 =cut
 
 sub highlight_query{
-  my ($self) = @_;
+  my ($self, $field) = @_;
   my $query = $self->query();
   if( $query->isa('App::CSE::Lucy::Search::QueryPrefix') ){
-    return $query->highlight_query();
+    return $query->highlight_query($field || 'content');
   }
   return $query;
 }
@@ -158,7 +162,14 @@ sub _build_hits{
 
 sub _build_query_str{
   my ($self) = @_;
-  return  shift @{$self->cse->args()} || '';
+
+  my $cse = $self->cse();
+
+  my @str_bits = ();
+  while($cse->args()->[0] && ! -e $cse->args()->[0] ){
+      push @str_bits, ( shift @{$cse->args()} );
+  }
+  return  join(' ', @str_bits);
 }
 
 sub _build_dir_str{
@@ -174,7 +185,7 @@ sub _build_filtered_query{
     # Filter the query with a filter on this dir as a prefix.
     my $fq = Lucy::Search::ANDQuery->new();
     $fq->add_child($self->query());
-    $fq->add_child(App::CSE::Lucy::Search::QueryPrefix->new( field => 'dir',
+    $fq->add_child(App::CSE::Lucy::Search::QueryPrefix->new( field => 'path.raw',
                                                              query_string => $dir_str.'*',
                                                              keep_case => 1
                                                            )
@@ -197,7 +208,7 @@ sub _build_query{
   # }
 
   my $analyzer;
-  my $fields = [ 'content' , 'path' ];
+  my $fields = [ 'content' , 'decl', 'path' ];
 
   if( $self->query_str() =~ /\*/ ){
     # Let the query parser keep the *'s
@@ -210,8 +221,9 @@ sub _build_query{
 
   my $qp = App::CSE::Lucy::Search::QueryParser->new( schema => $self->searcher->get_schema,
                                                      default_boolop => 'AND',
+                                                     fields => $fields,
                                                      $analyzer ?  ( analyzer => $analyzer ) : (),
-                                                     fields => $fields );
+                                                   );
   $qp->set_heed_colons(1);
 
   return $qp->parse($self->query_str());
@@ -262,10 +274,12 @@ sub execute{
 
     $LOGGER->trace("Score: ".$hit->get_score());
 
-    my $hit_str = &$colored($hit->{path}.'', 'magenta bold').' ('.$hit->{mime}.') ['.$hit->{mtime}.$star.']'.&$colored(':', 'cyan bold').q|
+    my $hit_str = &$colored($hit->{path}.'', 'magenta bold').' ('.$hit->{mime}.') ['.$hit->{mtime}.$star.']'.&$colored(':', 'cyan bold');
+    $hit_str .= q|
 |.( $excerpt || substr($hit->{content} || '' , 0 , 100 ) ).q|
 
 |;
+
 
     $LOGGER->info($hit_str);
   }

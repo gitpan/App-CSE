@@ -1,9 +1,91 @@
 ==================================================
-Changes from 2013-06-02 00:00:00 +0000 to present.
+Changes from 2013-06-04 00:00:00 +0000 to present.
 ==================================================
 
 ------------------------------------------
-version 0.004 at 2014-06-02 09:28:01 +0000
+version 0.005 at 2014-06-04 23:37:27 +0000
+------------------------------------------
+
+  Change: 814da6d047ddebfc422435379fcb84fea9ca6ac2
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-06-05 00:36:57 +0000
+
+    Added doc 
+
+  Change: 935cbb49cb4e0bde05bf60a95222e7c0c27e5ed1
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-06-05 00:32:03 +0000
+
+    More consistent highlight query building 
+
+  Change: f50e4122d88533d212b1aee427a56e13b2f57c5c
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-06-05 00:15:05 +0000
+
+    Testing declarations 
+
+  Change: 1b3d2b3cc186b4db8e814e76c321376cec7d9b4d
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-06-05 00:08:56 +0000
+
+    Nicer doc 
+
+  Change: cffa7b895bbf033f2fdb29abcd4bd3edd351723b
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-06-05 00:03:06 +0000
+
+    Nicer highlight query 
+
+  Change: 3cddd9b22fb5f41b49d81ad6926872ffadf83635
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-06-04 23:52:36 +0000
+
+    Extract declarations from perl files and boost the search for them 
+
+  Change: 9d942d4e7035324e0a93d80b01654b66f6390820
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-06-04 22:35:21 +0000
+
+    Nicer boosts 
+
+  Change: b06ab89f4a1d408cf8189441e51238c05dd34fc7
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-06-04 22:26:35 +0000
+
+    Nicer naming of field types 
+
+  Change: e5a0c779e59b80790ad1359653470bdd30913491
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-06-04 22:12:43 +0000
+
+    More precise size estimation before indexing 
+
+  Change: caac40bf281d3a920ba94c2d97beabe810850a96
+  Author: Jerome Eteve <jerome@broadbean.com>
+  Date : 2014-06-04 15:21:27 +0000
+
+    Check for the MIME info database in the check command 
+
+  Change: 2f12d51960a82187054c7674dcd695c981973815
+  Author: Jerome Eteve <jerome@broadbean.com>
+  Date : 2014-06-04 15:14:51 +0000
+
+    Bailing out tests if no shared-mime-info package is on the machine 
+
+  Change: edc5e9d76c53186c3c12fbb1d2b4dd522174d045
+  Author: Jerome Eteve <jerome@broadbean.com>
+  Date : 2014-06-04 14:22:24 +0000
+
+    Allow building the search query as parameters 
+
+  Change: 1ad8569ba07272036a799a7adfc0119acd6b4d2a
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-06-02 23:44:22 +0000
+
+    Added couple of features 
+
+------------------------------------------
+version 0.004 at 2014-06-02 09:27:14 +0000
 ------------------------------------------
 
   Change: 87b36155e8a4eafca3a18571d7a1c5dafd08ee0b

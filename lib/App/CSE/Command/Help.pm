@@ -1,8 +1,5 @@
 package App::CSE::Command::Help;
-{
-  $App::CSE::Command::Help::VERSION = '0.004';
-}
-
+$App::CSE::Command::Help::VERSION = '0.005';
 use Moose;
 extends qw/App::CSE::Command/;
 
@@ -41,7 +38,7 @@ App::CSE::Command::Help - cse's help
 
 =head1 SYNOPSIS
 
-  cse <command> [ .. options .. ] [ command arguments ]
+  cse <command> [ .. options .. ] [ -- ] [ command arguments ]
 
   # Search for 'Something'
   cse Something
@@ -66,6 +63,12 @@ Examples:
    ## Searching for the word 'Something'
    cse Something
 
+   ## Hello without world
+   cse hello AND NOT world
+
+   ## Same thing, but more 'Lucy-ish':
+   cse hello -world
+
    ## Searching for the word 'search'
    cse search search
 
@@ -74,6 +77,15 @@ Examples:
 
    ## Searching for any term starting with 'some':
    cse search some*
+
+   ## Search for some_method
+   cse some_method
+
+   ## Search for some_method declarations only:
+   cse decl:some_method
+
+   ## Search for some_method, excluding the files declaring it:
+   cse some_method -decl:some_method
 
 =head3 search syntax
 

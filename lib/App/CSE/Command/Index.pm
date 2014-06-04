@@ -1,8 +1,5 @@
 package App::CSE::Command::Index;
-{
-  $App::CSE::Command::Index::VERSION = '0.004';
-}
-
+$App::CSE::Command::Index::VERSION = '0.005';
 use Moose;
 extends qw/App::CSE::Command/;
 
@@ -13,7 +10,6 @@ use File::Find;
 use File::Path;
 use File::stat;
 use File::MimeInfo::Magic;
-use Filesys::DiskUsage;
 
 use Path::Class::Dir;
 use Lucy::Plan::Schema;
@@ -62,23 +58,31 @@ sub execute{
 
   # Full text analyzer.
   my $ft_anal = Lucy::Analysis::PolyAnalyzer->new(analyzers => [ $case_folder, $tokenizer ]);
+  my $decl_anal = Lucy::Analysis::PolyAnalyzer
+    ->new(
+          analyzers => [ $case_folder, Lucy::Analysis::RegexTokenizer->new( pattern => '\S+' ) ]
+         );
 
   # Full text types.
-  my $ft_nohl = Lucy::Plan::FullTextType->new(analyzer => $ft_anal, sortable => 1);
-  my $ft_type = Lucy::Plan::FullTextType->new(analyzer => $ft_anal, highlightable => 1 );
+  my $path_type = Lucy::Plan::FullTextType->new(analyzer => $ft_anal, sortable => 1, boost => 2.0);
+  my $body_type = Lucy::Plan::FullTextType->new(analyzer => $ft_anal, highlightable => 1 , boost => 1.0);
+  my $declare_type = Lucy::Plan::FullTextType->new( analyzer => $decl_anal, highlightable => 1 , boost => 4.0 );
+
 
   # String type
-  my $sstring_type = Lucy::Plan::StringType->new( sortable => 1 );
+  my $plain_sortable_string = Lucy::Plan::StringType->new( sortable => 1 );
 
   # Plain string type
   my $plain_string = Lucy::Plan::StringType->new();
 
-  $schema->spec_field( name => 'path' , type => $ft_nohl );
+
+  $schema->spec_field( name => 'content' , type => $body_type );
+  $schema->spec_field( name => 'decl' , type => $declare_type );
+  $schema->spec_field( name => 'dir'  , type => $plain_sortable_string );
+  $schema->spec_field( name => 'mtime' , type => $plain_sortable_string);
+  $schema->spec_field( name => 'mime' , type => $plain_sortable_string );
+  $schema->spec_field( name => 'path' , type => $path_type );
   $schema->spec_field( name => 'path.raw' , type => $plain_string );
-  $schema->spec_field( name => 'dir'  , type => $sstring_type );
-  $schema->spec_field( name => 'mtime' , type => $sstring_type );
-  $schema->spec_field( name => 'mime' , type => $sstring_type );
-  $schema->spec_field( name => 'content' , type => $ft_type );
 
 
   ## Ok Schema has been built
@@ -92,8 +96,40 @@ sub execute{
 
   my $dir_index = $self->dir_index();
 
+  ## Wrapper to build File::find wanter subs
+  my $wanted_wrapper = sub{
+    my ($wrapped) = @_;
+
+    return sub{
+      my $file_name = $File::Find::name;
+      unless( -r $file_name ){
+        $LOGGER->trace("Cannot read $file_name. Skipping");
+        return;
+      }
+
+      my $stat = File::stat::stat($file_name.'');
+      if( $file_name =~ /\/\.[^\/]+$/ ){
+        $LOGGER->trace("File $file_name is hidden. Skipping");
+        $File::Find::prune = 1;
+        return;
+      }
+      &$wrapped($file_name, $stat);
+    };
+  };
+
+
+
   $LOGGER->info("Estimating size. Please wait");
-  my $ESTIMATED_SIZE = Filesys::DiskUsage::du({ recursive => 1 }, $dir_index.'');
+  my $ESTIMATED_SIZE = 0;
+  File::Find::find({ wanted => &$wanted_wrapper(sub{
+                                                  my ($file_name, $stat) = @_;
+                                                  unless( -d $file_name ){
+                                                    $ESTIMATED_SIZE += $stat->size();
+                                                  }
+                                                }),
+                     no_chdir => 1,
+                     follow => 0,
+                   }, $dir_index );
 
   my $PROGRESS_BAR =  Term::ProgressBar->new({name  => 'Indexing',
                                               count => $ESTIMATED_SIZE,
@@ -107,25 +143,13 @@ sub execute{
   my $TOTAL_SIZE = 0;
 
   my $wanted = sub{
-    my $file_name = $File::Find::name;
+    my ($file_name, $stat) = @_;
 
-    unless( -r $file_name ){
-      $LOGGER->warn("Cannot read $file_name. Skipping");
-      return;
-    }
 
-    my $stat = File::stat::stat($file_name.'');
     unless( -d $file_name.'' ){
       $SIZE_LOOKEDAT += $stat->size();
       $PROGRESS_BAR->update($SIZE_LOOKEDAT);
     }
-
-    if( $file_name =~ /\/\.[^\/]+$/ ){
-      $LOGGER->trace("File $file_name is hidden. Skipping");
-      $File::Find::prune = 1;
-      return;
-    }
-
 
     my $mime_type = File::MimeInfo::Magic::mimetype($file_name.'') || 'application/octet-stream';
 
@@ -147,11 +171,11 @@ sub execute{
 
     $LOGGER->debug("Indexing ".$file->file_path().' as '.$file->mime_type());
 
-
     my $content = $file->content();
     $indexer->add_doc({
                        path => $file->file_path(),
                        'path.raw' => $file->file_path(),
+                       decl => join(' ', @{$file->decl()}),
                        dir => $file->dir(),
                        mime => $file->mime_type(),
                        mtime => $file->mtime->iso8601(),
@@ -159,10 +183,9 @@ sub execute{
                       });
     $NUM_INDEXED++;
     $TOTAL_SIZE+= $file->stat->size();
-
   };
 
-  File::Find::find({ wanted => $wanted,
+  File::Find::find({ wanted => &$wanted_wrapper($wanted),
                      no_chdir => 1,
                      follow => 0,
                    }, $dir_index );

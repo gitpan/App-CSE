@@ -10,6 +10,12 @@ use Path::Class::Dir;
 use Log::Log4perl qw/:easy/;
 # Log::Log4perl->easy_init($ERROR);
 
+use File::BaseDir qw//;
+unless( File::BaseDir::data_files('mime/globs') ){
+    plan skip_all => 'No mime-info database on the machine. The shared-mime-info package is available from http://freedesktop.org/';
+}
+
+
 my $idx_dir = File::Temp->newdir( CLEANUP => 1 );
 my $content_dir = Path::Class::Dir->new('t/toindex');
 
@@ -52,7 +58,7 @@ my $content_dir = Path::Class::Dir->new('t/toindex');
   my $cse = App::CSE->new();
   is( $cse->command()->execute(), 0 , "Ok execute has terminated just fine");
   ok( $cse->command()->isa('App::CSE::Command::Search') , "Ok got search");
-  is( $cse->command()->query->to_string() , '(content:bonjour OR path:bonjour)' , "Ok got good query");
+  is( $cse->command()->query->to_string() , '(content:bonjour OR decl:bonjour OR path:bonjour)' , "Ok got good query");
   ok( $cse->command()->hits() , "Ok got hits");
   is( $cse->command()->hits()->total_hits() , 2 , "Ok got two hits");
   ok( $cse->index_mtime() , "Ok got index mtime");
@@ -82,7 +88,7 @@ my $content_dir = Path::Class::Dir->new('t/toindex');
   local @ARGV = (  '--idx='.$idx_dir, 'hello', '--dir='.$content_dir.'');
   my $cse = App::CSE->new();
   use Data::Dumper;
-  is($cse->command->query()->to_string() , '(content:hello OR path:hello)');
+  is($cse->command->query()->to_string() , '(content:hello OR decl:hello OR path:hello)');
 }
 
 {
@@ -112,6 +118,22 @@ my $content_dir = Path::Class::Dir->new('t/toindex');
 {
   # Qualified composed queries
   local @ARGV = (  '--idx='.$idx_dir, 'path:hell* AND NOT content:helo*', '--dir='.$content_dir.'');
+  my $cse = App::CSE->new();
+  use Data::Dumper;
+  is($cse->command->query()->to_string(), '(path:hell* AND -content:helo*)');
+}
+
+{
+  # Qualified composed queries, multi args
+  local @ARGV = (  '--idx='.$idx_dir, 'path:hell*', 'AND', 'NOT' , 'content:helo*', '--dir='.$content_dir.'');
+  my $cse = App::CSE->new();
+  use Data::Dumper;
+  is($cse->command->query()->to_string(), '(path:hell* AND -content:helo*)');
+}
+
+{
+  # Same in another way
+  local @ARGV = (  '--idx='.$idx_dir, 'path:hell*', '-content:helo*', '--dir='.$content_dir.'');
   my $cse = App::CSE->new();
   use Data::Dumper;
   is($cse->command->query()->to_string(), '(path:hell* AND -content:helo*)');

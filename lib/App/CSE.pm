@@ -7,10 +7,7 @@ BEGIN{
 use strict;
 use warnings;
 package App::CSE;
-{
-  $App::CSE::VERSION = '0.004';
-}
-
+$App::CSE::VERSION = '0.005';
 
 use Moose;
 use Class::Load;
@@ -51,9 +48,15 @@ See L<App::CSE::Command::Help> For a description the available commands.
 
 =over
 
-=item Hit highlighting
+=item Hits highlighting
 
-=item Dirty index indicator
+=item Prefix* queries
+
+=item Complex queries syntax (Lucy)
+
+=item Dirty files indicator
+
+=item Declaration queries (Perl subs and packages)
 
 =item Directory filtering
 
@@ -241,6 +244,8 @@ sub _build_options{
   my %options = ();
 
   my $p = Getopt::Long::Parser->new;
+  ## Avoid capturing unknown options, like -hello
+  $p->configure( 'pass_through' );
   # Beware that accessing options_specs will consume the command as the first ARGV
   $p->getoptions(\%options , 'idx=s', 'dir=s', 'max-size=i', 'verbose+', @{$self->options_specs()} );
   return \%options;

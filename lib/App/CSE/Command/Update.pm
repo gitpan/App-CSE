@@ -1,8 +1,5 @@
 package App::CSE::Command::Update;
-{
-  $App::CSE::Command::Update::VERSION = '0.004';
-}
-
+$App::CSE::Command::Update::VERSION = '0.005';
 use Moose;
 extends qw/App::CSE::Command/;
 

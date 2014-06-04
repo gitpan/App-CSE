@@ -1,8 +1,5 @@
 package App::CSE::Lucy::Search::QueryPrefix;
-{
-  $App::CSE::Lucy::Search::QueryPrefix::VERSION = '0.004';
-}
-
+$App::CSE::Lucy::Search::QueryPrefix::VERSION = '0.005';
 ## Copied from http://api.metacpan.org/source/CREAMYG/Lucy-0.3.3/sample/PrefixQuery.pm
 
 # Licensed to the Apache Software Foundation (ASF) under one or more
@@ -31,13 +28,15 @@ use Scalar::Util qw( blessed );
 # Inside-out member vars and hand-rolled accessors.
 my %query_string;
 my %field;
-my %highlight_query;
+my %highlight_terms;
 my %keep_case;
 
 sub get_query_string { my $self = shift; return $query_string{$$self} }
 sub get_field        { my $self = shift; return $field{$$self} }
-sub highlight_query  { my $self = shift; return $highlight_query{$$self} }
+sub highlight_terms  { my $self = shift; return $highlight_terms{$$self} }
 sub keep_case        { my $self = shift; return $keep_case{$$self} }
+
+
 
 sub new {
     my ( $class, %args ) = @_;
@@ -57,25 +56,35 @@ sub new {
 
     $query_string{$$self} = $query_string;
     $field{$$self}        = $field;
-    $highlight_query{$$self} = Lucy::Search::ORQuery->new();
+    $highlight_terms{$$self} = [];
     $keep_case{$$self} = $keep_case;
 
     return $self;
   }
 
+sub highlight_query{
+  my ($self, $field) = @_;
+  my $query = Lucy::Search::ORQuery->new();
+  foreach my $term ( @{$self->highlight_terms()} ){
+    $query->add_child(Lucy::Search::TermQuery->new(
+                                                   field => $field || $self->get_field(),
+                                                   term  => $term,
+                                                  ));
+  }
+  return $query;
+}
+
+
 sub add_matching_term{
   my ($self, $term ) = @_;
-  $self->highlight_query()->add_child(Lucy::Search::TermQuery->new(
-                                                                   field => $self->get_field(),
-                                                                   term  => $term,
-                                                                  ));
+  push @{$self->highlight_terms()}, $term;
 }
 
 sub DESTROY {
     my $self = shift;
     delete $query_string{$$self};
     delete $field{$$self};
-    delete $highlight_query{$$self};
+    delete $highlight_terms{$$self};
     $self->SUPER::DESTROY;
   }
 
@@ -104,10 +113,7 @@ sub make_compiler {
 1;
 
 package App::CSE::Lucy::Search::PrefixCompiler;
-{
-  $App::CSE::Lucy::Search::PrefixCompiler::VERSION = '0.004';
-}
-
+$App::CSE::Lucy::Search::PrefixCompiler::VERSION = '0.005';
 use base qw( Lucy::Search::Compiler );
 
 sub make_matcher {
@@ -159,10 +165,7 @@ sub make_matcher {
 }
 
 package App::CSE::Lucy::Search::PrefixMatcher;
-{
-  $App::CSE::Lucy::Search::PrefixMatcher::VERSION = '0.004';
-}
-
+$App::CSE::Lucy::Search::PrefixMatcher::VERSION = '0.005';
 use base qw( Lucy::Search::Matcher );
 
 # Inside-out member vars.

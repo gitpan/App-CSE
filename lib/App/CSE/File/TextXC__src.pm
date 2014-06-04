@@ -1,8 +1,5 @@
 package App::CSE::File::TextXC__src;
-{
-  $App::CSE::File::TextXC__src::VERSION = '0.004';
-}
-
+$App::CSE::File::TextXC__src::VERSION = '0.005';
 use Moose;
 extends qw/App::CSE::File/;
 
