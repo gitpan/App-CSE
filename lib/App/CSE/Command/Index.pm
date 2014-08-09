@@ -1,5 +1,5 @@
 package App::CSE::Command::Index;
-$App::CSE::Command::Index::VERSION = '0.005';
+$App::CSE::Command::Index::VERSION = '0.006';
 use Moose;
 extends qw/App::CSE::Command/;
 
@@ -54,7 +54,7 @@ sub execute{
 
 
   my $case_folder = Lucy::Analysis::CaseFolder->new();
-  my $tokenizer = Lucy::Analysis::StandardTokenizer->new();
+  my $tokenizer = Lucy::Analysis::RegexTokenizer->new( pattern => '\w+' ); # ;Lucy::Analysis::StandardTokenizer->new();
 
   # Full text analyzer.
   my $ft_anal = Lucy::Analysis::PolyAnalyzer->new(analyzers => [ $case_folder, $tokenizer ]);
@@ -196,6 +196,12 @@ sub execute{
 
   rmtree $self->cse->index_dir()->stringify();
   rename $index_dir , $self->cse->index_dir()->stringify();
+
+  $self->cse->index_meta->{index_time} = DateTime->now()->iso8601();
+  # Also inject the right version
+  $self->cse->index_meta->{version} = $self->cse->version();;
+
+  $self->cse->save_index_meta();
 
   my $END_TIME = Time::HiRes::time();
 

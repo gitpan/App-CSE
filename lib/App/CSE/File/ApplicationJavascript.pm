@@ -1,5 +1,5 @@
 package App::CSE::File::ApplicationJavascript;
-$App::CSE::File::ApplicationJavascript::VERSION = '0.005';
+$App::CSE::File::ApplicationJavascript::VERSION = '0.006';
 use Moose;
 extends qw/App::CSE::File/;
 

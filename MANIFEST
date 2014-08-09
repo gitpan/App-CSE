@@ -47,6 +47,7 @@ t/04-search.t
 t/05-more-search.t
 t/06-update.t
 t/07-decl.t
+t/08-meta.t
 t/toindex/cpp/head.h
 t/toindex/cpp/hello.cc
 t/toindex/cpp/hello.cpp

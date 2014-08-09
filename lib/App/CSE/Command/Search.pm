@@ -1,5 +1,5 @@
 package App::CSE::Command::Search;
-$App::CSE::Command::Search::VERSION = '0.005';
+$App::CSE::Command::Search::VERSION = '0.006';
 use Moose;
 extends qw/App::CSE::Command/;
 
@@ -148,6 +148,15 @@ sub _build_hits{
   my ($self) = @_;
 
   $LOGGER->info("Searching for '".$self->filtered_query()->to_string()."'");
+
+
+  {
+    my $this_version = $self->cse()->version();
+    my $index_version = $self->cse->index_meta->{version};
+    unless( $this_version eq $index_version ){
+      $LOGGER->warn($self->cse()->colorizer->colored("Index version is too old ($index_version) for this program ($this_version). Please consider re-indexing", 'yellow bold'));
+    }
+  }
 
   my $perl_version = $];
 

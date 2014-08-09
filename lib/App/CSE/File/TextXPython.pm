@@ -1,5 +1,5 @@
 package App::CSE::File::TextXPython;
-$App::CSE::File::TextXPython::VERSION = '0.005';
+$App::CSE::File::TextXPython::VERSION = '0.006';
 use Moose;
 extends qw/App::CSE::File/;
 
