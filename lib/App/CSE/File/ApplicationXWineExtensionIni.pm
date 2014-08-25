@@ -1,5 +1,5 @@
 package App::CSE::File::ApplicationXWineExtensionIni;
-$App::CSE::File::ApplicationXWineExtensionIni::VERSION = '0.006';
+$App::CSE::File::ApplicationXWineExtensionIni::VERSION = '0.007';
 use Moose;
 extends qw/App::CSE::File/;
 

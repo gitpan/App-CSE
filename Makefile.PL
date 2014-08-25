@@ -32,9 +32,11 @@ my %WriteMakefileArgs = (
     "File::MimeInfo::Magic" => 0,
     "File::Slurp" => 0,
     "File::stat" => 0,
+    "Filesys::Notify::Simple" => 0,
     "Getopt::Long" => 0,
     "IO::Interactive" => 0,
     "JSON" => 0,
+    "Log::Dispatch::Syslog" => 0,
     "Log::Log4perl" => 0,
     "Lucy" => 0,
     "Moose" => 0,
@@ -49,10 +51,12 @@ my %WriteMakefileArgs = (
   },
   "TEST_REQUIRES" => {
     "Carp::Always" => 0,
+    "File::Copy::Recursive" => 0,
+    "File::Slurp" => 0,
     "File::Temp" => 0,
     "Test::More" => 0
   },
-  "VERSION" => "0.006",
+  "VERSION" => "0.007",
   "test" => {
     "TESTS" => "t/*.t t/toindex/perl/*.t"
   }
@@ -67,14 +71,17 @@ my %FallbackPrereqs = (
   "DateTime" => 0,
   "Encode" => 0,
   "File::BaseDir" => 0,
+  "File::Copy::Recursive" => 0,
   "File::Find" => 0,
   "File::MimeInfo::Magic" => 0,
   "File::Slurp" => 0,
   "File::Temp" => 0,
   "File::stat" => 0,
+  "Filesys::Notify::Simple" => 0,
   "Getopt::Long" => 0,
   "IO::Interactive" => 0,
   "JSON" => 0,
+  "Log::Dispatch::Syslog" => 0,
   "Log::Log4perl" => 0,
   "Lucy" => 0,
   "Moose" => 0,
@@ -98,6 +105,26 @@ unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
 
 delete $WriteMakefileArgs{CONFIGURE_REQUIRES}
   unless eval { ExtUtils::MakeMaker->VERSION(6.52) };
+
+if ( $^O eq 'linux' ) {
+	$WriteMakefileArgs{PREREQ_PM}{'Linux::Inotify2'} = '0';
+}
+
+if ( $^O eq 'darwin' ) {
+	$WriteMakefileArgs{PREREQ_PM}{'Mac::FSEvent'} = '0';
+}
+
+if ( $^O eq 'freebsd' ) {
+	$WriteMakefileArgs{PREREQ_PM}{'Filesys::Notify::KQueue'} = '0';
+}
+
+if ( $^O eq 'MSWin32' ) {
+	$WriteMakefileArgs{PREREQ_PM}{'Win32::ChangeNotify'} = '0';
+}
+
+if ( $^O eq 'cygwin' ) {
+	$WriteMakefileArgs{PREREQ_PM}{'Win32::ChangeNotify'} = '0';
+}
 
 WriteMakefile(%WriteMakefileArgs);
 

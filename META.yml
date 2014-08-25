@@ -4,11 +4,13 @@ author:
   - 'Jerome Eteve <jerome.eteve@gmail.com>'
 build_requires:
   Carp::Always: '0'
+  File::Copy::Recursive: '0'
+  File::Slurp: '0'
   File::Temp: '0'
   Test::More: '0'
 configure_requires:
   ExtUtils::MakeMaker: '6.30'
-dynamic_config: 0
+dynamic_config: 1
 generated_by: 'Dist::Zilla version 5.019, CPAN::Meta::Converter version 2.141170'
 license: perl
 meta-spec:
@@ -26,9 +28,11 @@ requires:
   File::MimeInfo::Magic: '0'
   File::Slurp: '0'
   File::stat: '0'
+  Filesys::Notify::Simple: '0'
   Getopt::Long: '0'
   IO::Interactive: '0'
   JSON: '0'
+  Log::Dispatch::Syslog: '0'
   Log::Log4perl: '0'
   Lucy: '0'
   Moose: '0'
@@ -43,4 +47,4 @@ requires:
 resources:
   homepage: https://github.com/jeteve/App-CSE
   repository: https://github.com/jeteve/App-CSE.git
-version: '0.006'
+version: '0.007'

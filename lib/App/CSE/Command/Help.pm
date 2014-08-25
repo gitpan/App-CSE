@@ -1,5 +1,5 @@
 package App::CSE::Command::Help;
-$App::CSE::Command::Help::VERSION = '0.006';
+$App::CSE::Command::Help::VERSION = '0.007';
 use Moose;
 extends qw/App::CSE::Command/;
 
@@ -146,6 +146,17 @@ Directory to index. Defaults to current directory.
 =head2 update
 
 Updates the files marked as dirty (after a search) in the index.
+
+=head2 watch
+
+Start a deamon to update the current index on changes. This will log to syslog.
+
+If you use the dirty files marker feature, you should disable this as it
+will keep the index in sync with your codebase. (See unwatch below).
+
+=head2 unwatch
+
+Stops the deamon that watches changes to maintain the current index.
 
 =head1 COMMON OPTIONS
 

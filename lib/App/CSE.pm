@@ -7,12 +7,13 @@ BEGIN{
 use strict;
 use warnings;
 package App::CSE;
-$App::CSE::VERSION = '0.006';
+$App::CSE::VERSION = '0.007';
 
 use Moose;
 use Class::Load;
 use App::CSE::Colorizer;
 use DateTime;
+use File::MimeInfo::Magic;
 use IO::Interactive;
 use JSON;
 use String::CamelCase;
@@ -55,6 +56,8 @@ See L<App::CSE::Command::Help> For a description the available commands.
 =item Complex queries syntax (Lucy)
 
 =item Dirty files indicator
+
+=item Directory watcher
 
 =item Declaration queries (Perl subs and packages)
 
@@ -113,6 +116,8 @@ App::CSE uses L<Log::Log4perl>
 See L<App::CSE::Command::Help>
 
 =cut
+
+my $LOGGER = Log::Log4perl->get_logger();
 
 has 'command_name' => ( is => 'ro', isa => 'Str', required => 1 , lazy_build => 1);
 has 'command' => ( is => 'ro', isa => 'App::CSE::Command', lazy_build => 1);
@@ -326,4 +331,45 @@ sub version{
   return $App::CSE::VERSION || 'dev';
 }
 
+
+# Performs very basic checks on a filename, see if its valid
+# for indexing.
+sub is_file_valid{
+  my ($self, $file_name , $opts ) = @_;
+
+  unless( defined( $opts ) ){
+    $opts = {};
+  }
+
+  if( $file_name =~ /(?:\/|^)\.[^\/\.]+/ ){
+    $LOGGER->trace("File $file_name is hidden. Skipping");
+    return $opts->{on_hidden} ? &{$opts->{on_hidden}}() : undef;
+  }
+
+  unless( -r $file_name ){
+    $LOGGER->trace("Cannot read $file_name. Skipping");
+    return $opts->{on_unreadable} ? &{$opts->{on_unreadable}}() : undef;
+  }
+
+  return 1;
+}
+
+
+# Returns this file mimetype if we find its
+# not a blacklisted one.
+{
+  my $BLACK_LIST = {
+                    'application/x-trash' => 1
+                   };
+  sub valid_mime_type{
+    my ($self, $file_name , $opts) = @_;
+    my $mime_type = File::MimeInfo::Magic::mimetype($file_name.'') || 'application/octet-stream';
+
+    if( $BLACK_LIST->{$mime_type} ){
+      return;
+    }
+    return $mime_type;
+  }
+
+}
 __PACKAGE__->meta->make_immutable();

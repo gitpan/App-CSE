@@ -1,7 +1,10 @@
 package App::CSE::Command::Index;
-$App::CSE::Command::Index::VERSION = '0.006';
+$App::CSE::Command::Index::VERSION = '0.007';
 use Moose;
 extends qw/App::CSE::Command/;
+with qw/App::CSE::Role::DirIndex/;
+
+use App::CSE::Command::Unwatch;
 
 use App::CSE::File;
 
@@ -9,7 +12,6 @@ use File::Basename;
 use File::Find;
 use File::Path;
 use File::stat;
-use File::MimeInfo::Magic;
 
 use Path::Class::Dir;
 use Lucy::Plan::Schema;
@@ -24,27 +26,16 @@ use Time::HiRes;
 use Log::Log4perl;
 my $LOGGER = Log::Log4perl->get_logger();
 
-my $BLACK_LIST = {
-                  'application/x-trash' => 1
-                 };
 
-
-has 'dir_index' => ( is => 'ro' , isa => 'Path::Class::Dir' , lazy_build => 1 );
-
-
-sub _build_dir_index{
-  my ($self) = @_;
-
-  if( my $to_index = $self->cse->options()->{dir} ){
-    return Path::Class::Dir->new($to_index);
-  }
-
-  ## Default to the current directory
-  return Path::Class::Dir->new();
-}
 
 sub execute{
   my ($self) = @_;
+
+
+  ## We need to unwatch before indexing. Always.
+  my $unwatch_cmd =  App::CSE::Command::Unwatch->new( { cse => $self->cse() } );
+  $unwatch_cmd->execute();
+
 
   ## We will index as a new dir.
   my $index_dir = $self->cse()->index_dir().'-new';
@@ -96,23 +87,26 @@ sub execute{
 
   my $dir_index = $self->dir_index();
 
+  my $cse = $self->cse();
+
   ## Wrapper to build File::find wanter subs
   my $wanted_wrapper = sub{
     my ($wrapped) = @_;
 
     return sub{
       my $file_name = $File::Find::name;
-      unless( -r $file_name ){
-        $LOGGER->trace("Cannot read $file_name. Skipping");
+
+      my $valid = $cse->is_file_valid($file_name , {
+                                                    on_hidden => sub{
+                                                      $File::Find::prune = 1;
+                                                      return undef;
+                                                    }
+                                                   });
+      unless( $valid ){
         return;
       }
 
       my $stat = File::stat::stat($file_name.'');
-      if( $file_name =~ /\/\.[^\/]+$/ ){
-        $LOGGER->trace("File $file_name is hidden. Skipping");
-        $File::Find::prune = 1;
-        return;
-      }
       &$wrapped($file_name, $stat);
     };
   };
@@ -142,6 +136,7 @@ sub execute{
   my $SIZE_LOOKEDAT = 0;
   my $TOTAL_SIZE = 0;
 
+
   my $wanted = sub{
     my ($file_name, $stat) = @_;
 
@@ -151,9 +146,9 @@ sub execute{
       $PROGRESS_BAR->update($SIZE_LOOKEDAT);
     }
 
-    my $mime_type = File::MimeInfo::Magic::mimetype($file_name.'') || 'application/octet-stream';
 
-    if( $BLACK_LIST->{$mime_type} ){
+    my $mime_type = $cse->valid_mime_type($file_name);
+    unless( $mime_type ){
       return;
     }
 
@@ -163,7 +158,7 @@ sub execute{
     }
 
     ## Build a file instance.
-    my $file = $file_class->new({cse => $self->cse(),
+    my $file = $file_class->new({cse => $cse,
                                  mime_type => $mime_type,
                                  stat => $stat,
                                  file_path => $file_name.'' })->effective_object();
@@ -194,7 +189,7 @@ sub execute{
   $PROGRESS_BAR->update($ESTIMATED_SIZE);
 
 
-  rmtree $self->cse->index_dir()->stringify();
+  rmtree $cse->index_dir()->stringify();
   rename $index_dir , $self->cse->index_dir()->stringify();
 
   $self->cse->index_meta->{index_time} = DateTime->now()->iso8601();

@@ -16,7 +16,9 @@ lib/App/CSE/Command/Check.pm
 lib/App/CSE/Command/Help.pm
 lib/App/CSE/Command/Index.pm
 lib/App/CSE/Command/Search.pm
+lib/App/CSE/Command/Unwatch.pm
 lib/App/CSE/Command/Update.pm
+lib/App/CSE/Command/Watch.pm
 lib/App/CSE/File.pm
 lib/App/CSE/File/ApplicationJavascript.pm
 lib/App/CSE/File/ApplicationXPerl.pm
@@ -39,6 +41,7 @@ lib/App/CSE/File/TextXTex.pm
 lib/App/CSE/Lucy/Highlight/Highlighter.pm
 lib/App/CSE/Lucy/Search/QueryParser.pm
 lib/App/CSE/Lucy/Search/QueryPrefix.pm
+lib/App/CSE/Role/DirIndex.pm
 t/00-load.t
 t/01-help.t
 t/02-check.t
@@ -48,6 +51,8 @@ t/05-more-search.t
 t/06-update.t
 t/07-decl.t
 t/08-meta.t
+t/09-watch.t
+t/10-hidden.t
 t/toindex/cpp/head.h
 t/toindex/cpp/hello.cc
 t/toindex/cpp/hello.cpp
