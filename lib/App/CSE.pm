@@ -7,7 +7,10 @@ BEGIN{
 use strict;
 use warnings;
 package App::CSE;
-$App::CSE::VERSION = '0.007';
+{
+  $App::CSE::VERSION = '0.008';
+}
+
 
 use Moose;
 use Class::Load;

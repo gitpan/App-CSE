@@ -1,5 +1,8 @@
 package App::CSE::File::ApplicationXml;
-$App::CSE::File::ApplicationXml::VERSION = '0.007';
+{
+  $App::CSE::File::ApplicationXml::VERSION = '0.008';
+}
+
 use Moose;
 extends qw/App::CSE::File/;
 

@@ -1,5 +1,8 @@
 package App::CSE::Command::Watch;
-$App::CSE::Command::Watch::VERSION = '0.007';
+{
+  $App::CSE::Command::Watch::VERSION = '0.008';
+}
+
 use Moose;
 extends qw/App::CSE::Command/;
 with qw/App::CSE::Role::DirIndex/;
@@ -147,7 +150,7 @@ log4perl.appender.SYSLOG.layout    = Log::Log4perl::Layout::SimpleLayout
 
 
                          # Delete the file anyway.
-                         $LOGGER->info("Deleting $file_name from index");
+                         $LOGGER->debug("Deleting $file_name from index");
                          $indexer->delete_by_term( field => 'path.raw',
                                                    term => $file_name );
 
@@ -177,7 +180,7 @@ log4perl.appender.SYSLOG.layout    = Log::Log4perl::Layout::SimpleLayout
                          my $content = $file->content();
 
 
-                         $LOGGER->info("Adding $file_name to index as ".$file->mime_type());
+                         $LOGGER->debug("Adding $file_name to index as ".$file->mime_type());
                          $indexer->add_doc({
                                             path => $file->file_path(),
                                             'path.raw' => $file->file_path(),

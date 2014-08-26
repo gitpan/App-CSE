@@ -1,5 +1,8 @@
 package App::CSE::Command::Search;
-$App::CSE::Command::Search::VERSION = '0.007';
+{
+  $App::CSE::Command::Search::VERSION = '0.008';
+}
+
 use Moose;
 extends qw/App::CSE::Command/;
 

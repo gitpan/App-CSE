@@ -1,9 +1,31 @@
 ==================================================
-Changes from 2013-08-25 00:00:00 +0000 to present.
+Changes from 2013-08-26 00:00:00 +0000 to present.
 ==================================================
 
 ------------------------------------------
-version 0.007 at 2014-08-25 18:19:30 +0000
+version 0.008 at 2014-08-26 17:20:52 +0000
+------------------------------------------
+
+  Change: ac18beaecbae75aa40ff452cc2ce36f80cef8e08
+  Author: Jerome Eteve <jerome@broadbean.com>
+  Date : 2014-08-26 18:19:29 +0000
+
+    Log at debug level file reindexing 
+
+  Change: be821bef2e5ef6f632640ce7c176abaa9762c38e
+  Author: Jerome Eteve <jerome@broadbean.com>
+  Date : 2014-08-26 17:55:09 +0000
+
+    Avoid slow tests 
+
+  Change: b7742b0110b0321520f2eb6d228bb135bce97b58
+  Author: Jerome Eteve <jerome@eteve.net>
+  Date : 2014-08-25 20:42:07 +0000
+
+    No color, no colored 
+
+------------------------------------------
+version 0.007 at 2014-08-25 17:58:35 +0000
 ------------------------------------------
 
   Change: 3a477d07b17cc17635b8a32d03cff54224964063

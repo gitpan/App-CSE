@@ -1,5 +1,8 @@
 package App::CSE::Command::Unwatch;
-$App::CSE::Command::Unwatch::VERSION = '0.007';
+{
+  $App::CSE::Command::Unwatch::VERSION = '0.008';
+}
+
 use Moose;
 extends qw/App::CSE::Command/;
 with qw/App::CSE::Role::DirIndex/;
@@ -22,7 +25,7 @@ sub execute{
 
   my $previous_pid = $cse->index_meta()->{'watcher.pid'};
   unless( $previous_pid ){
-    $LOGGER->warn(&$colored("No watcher PID in ".$cse->index_meta_file()." - nothing to do"));
+    $LOGGER->warn("No watcher PID in ".$cse->index_meta_file()." - nothing to do");
     return 1;
   }
 
